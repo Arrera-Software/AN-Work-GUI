@@ -21,7 +21,7 @@ class CAnWorkGUI:
         # Frame rouge, tout en haut, occupe toute la largeur, sticky "nsew" pour grandir dans toutes les directions
         self.__fAcceuil.grid(row=0, column=0, columnspan=3, sticky='nsew')
         # Frame bleu, tout en bas, sticky "ew" pour couvrir toute la largeur
-        self.__fDock.grid(row=1, column=0, columnspan=3, sticky='ew')
+        #self.__fDock.grid(row=1, column=0, columnspan=3, sticky='ew')
 
     def active(self):
         self.__arrTk.view()
