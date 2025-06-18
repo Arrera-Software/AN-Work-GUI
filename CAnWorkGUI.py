@@ -1,8 +1,9 @@
 from arrera_tk import *
 
 class CAnWorkGUI:
-    def __init__(self, arrtk : CArreraTK,nameAssistant : str):
+    def __init__(self, arrtk : CArreraTK,nameAssistant : str,asset:str):
         self.__arrTk = arrtk
+        self.__emplacementAsset = asset+"/"
         self.__screen = self.__arrTk.aTopLevel(width=500, height=600,
                                                title=nameAssistant + " : Arrera Work",
                                                resizable=True)
@@ -14,15 +15,20 @@ class CAnWorkGUI:
         self.__screen.columnconfigure(1, weight=2)
         self.__screen.columnconfigure(2, weight=1)
 
+        # Recuperation des image
+        imgTableur = self.__arrTk.createImage(self.__emplacementAsset + "tableur.png",tailleX=100, tailleY=100)
+        imgWord = self.__arrTk.createImage(self.__emplacementAsset + "word.png",tailleX=100, tailleY=100)
+        imgProject = self.__arrTk.createImage(self.__emplacementAsset + "project.png",tailleX=100, tailleY=100)
+
         # Frames
         self.__fAcceuil = self.__arrTk.createFrame(self.__screen)
         self.__fDock = self.__arrTk.createFrame(self.__screen, bg="blue", height=70)
 
         # Widgets dans la frame d'accueil
         labelTitle = self.__arrTk.createLabel(self.__fAcceuil, text=nameAssistant + " : Arrera Work",ppolice="Arial",ptaille=25)
-        btnArreraTableur = self.__arrTk.createButton(self.__fAcceuil,bg="green")
-        btnArreraWord = self.__arrTk.createButton(self.__fAcceuil,bg="cyan")
-        btnArreraWork = self.__arrTk.createButton(self.__fAcceuil,bg="yellow")
+        btnArreraTableur = self.__arrTk.createButton(self.__fAcceuil,width=100, height=100, image=imgTableur)
+        btnArreraWord = self.__arrTk.createButton(self.__fAcceuil, width=100, height=100, image=imgWord)
+        btnArreraProject = self.__arrTk.createButton(self.__fAcceuil, width=100, height=100, image=imgProject)
 
         # Grille des frame
         # Ajoute 3 lignes à fAcceuil pour jouer sur le centrage vertical
@@ -39,9 +45,9 @@ class CAnWorkGUI:
         labelTitle.grid(row=0, column=0, columnspan=3, sticky='new', pady=20)  # En haut, centré, espacé en haut
 
         # Placement des boutons sur la même ligne et centrés
-        btnArreraTableur.grid(row=1, column=0, padx=10, pady=60, sticky='ew')
-        btnArreraWord.grid(row=1, column=1, padx=10, pady=60, sticky='ew')
-        btnArreraWork.grid(row=1, column=2, padx=10, pady=60, sticky='ew')
+        btnArreraTableur.grid(row=1, column=0, padx=10, pady=60)
+        btnArreraWord.grid(row=1, column=1, padx=10, pady=60)
+        btnArreraProject.grid(row=1, column=2, padx=10, pady=60)
 
         # Affichage main
         self.__fAcceuil.grid(row=0, column=0, columnspan=3, sticky='nsew')
