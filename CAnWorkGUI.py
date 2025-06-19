@@ -23,6 +23,7 @@ class CAnWorkGUI:
         imgTableurDock = self.__arrTk.createImage(self.__emplacementAsset + "tableur.png",tailleX=50, tailleY=50)
         imgWordDock = self.__arrTk.createImage(self.__emplacementAsset + "word.png",tailleX=50, tailleY=50)
         imgProjectDock = self.__arrTk.createImage(self.__emplacementAsset + "project.png",tailleX=50, tailleY=50)
+        imgAnnulerDock = self.__arrTk.createImage(self.__emplacementAsset + "annuler.png",tailleX=50, tailleY=50)
 
         # Frames
         self.__fAcceuil = self.__arrTk.createFrame(self.__screen)
@@ -55,7 +56,7 @@ class CAnWorkGUI:
                                                          height=60, image=imgProjectDock,
                                                          command=self.__activeProjet)
         btnArreraBackAcceuilDock = self.__arrTk.createButton(self.__fDock, width=60,
-                                                             height=60,
+                                                             height=60,image =imgAnnulerDock,
                                                              command=self.__activeAcceuil)
 
         # Grille des frame
