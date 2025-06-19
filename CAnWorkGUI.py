@@ -22,13 +22,21 @@ class CAnWorkGUI:
 
         # Frames
         self.__fAcceuil = self.__arrTk.createFrame(self.__screen)
-        self.__fDock = self.__arrTk.createFrame(self.__screen, bg="blue", height=70)
+        self.__fDock = self.__arrTk.createFrame(self.__screen, bg="grey", height=70)
+        self.__fTableur = self.__arrTk.createFrame(self.__screen)
+        self.__fWord = self.__arrTk.createFrame(self.__screen)
+        self.__fProjet = self.__arrTk.createFrame(self.__screen)
 
         # Widgets dans la frame d'accueil
         labelTitle = self.__arrTk.createLabel(self.__fAcceuil, text=nameAssistant + " : Arrera Work",ppolice="Arial",ptaille=25)
-        btnArreraTableur = self.__arrTk.createButton(self.__fAcceuil,width=100, height=100, image=imgTableur)
-        btnArreraWord = self.__arrTk.createButton(self.__fAcceuil, width=100, height=100, image=imgWord)
-        btnArreraProject = self.__arrTk.createButton(self.__fAcceuil, width=100, height=100, image=imgProject)
+        btnArreraTableurAcceuil = self.__arrTk.createButton(self.__fAcceuil,width=100, height=100, image=imgTableur)
+        btnArreraWordAcceuil = self.__arrTk.createButton(self.__fAcceuil, width=100, height=100, image=imgWord)
+        btnArreraProjectAcceuil = self.__arrTk.createButton(self.__fAcceuil, width=100, height=100, image=imgProject)
+
+        # Widgets dans la frame dock
+        btnArreraTableurDock = self.__arrTk.createButton(self.__fDock,width=60, height=60, image=imgTableur)
+        btnArreraWordDock = self.__arrTk.createButton(self.__fDock, width=60, height=60, image=imgWord)
+        btnArreraProjectDock = self.__arrTk.createButton(self.__fDock, width=60, height=60, image=imgProject)
 
         # Grille des frame
         # Ajoute 3 lignes à fAcceuil pour jouer sur le centrage vertical
@@ -45,9 +53,9 @@ class CAnWorkGUI:
         labelTitle.grid(row=0, column=0, columnspan=3, sticky='new', pady=20)  # En haut, centré, espacé en haut
 
         # Placement des boutons sur la même ligne et centrés
-        btnArreraTableur.grid(row=1, column=0, padx=10, pady=60)
-        btnArreraWord.grid(row=1, column=1, padx=10, pady=60)
-        btnArreraProject.grid(row=1, column=2, padx=10, pady=60)
+        btnArreraTableurAcceuil.grid(row=1, column=0, padx=10, pady=60)
+        btnArreraWordAcceuil.grid(row=1, column=1, padx=10, pady=60)
+        btnArreraProjectAcceuil.grid(row=1, column=2, padx=10, pady=60)
 
         # Affichage main
         self.__fAcceuil.grid(row=0, column=0, columnspan=3, sticky='nsew')
