@@ -16,9 +16,13 @@ class CAnWorkGUI:
         self.__screen.columnconfigure(2, weight=1)
 
         # Recuperation des image
-        imgTableur = self.__arrTk.createImage(self.__emplacementAsset + "tableur.png",tailleX=100, tailleY=100)
-        imgWord = self.__arrTk.createImage(self.__emplacementAsset + "word.png",tailleX=100, tailleY=100)
-        imgProject = self.__arrTk.createImage(self.__emplacementAsset + "project.png",tailleX=100, tailleY=100)
+        imgTableurAcceuil = self.__arrTk.createImage(self.__emplacementAsset + "tableur.png",tailleX=100, tailleY=100)
+        imgWordAcceuil = self.__arrTk.createImage(self.__emplacementAsset + "word.png",tailleX=100, tailleY=100)
+        imgProjectAcceuil = self.__arrTk.createImage(self.__emplacementAsset + "project.png",tailleX=100, tailleY=100)
+
+        imgTableurDock = self.__arrTk.createImage(self.__emplacementAsset + "tableur.png",tailleX=50, tailleY=50)
+        imgWordDock = self.__arrTk.createImage(self.__emplacementAsset + "word.png",tailleX=50, tailleY=50)
+        imgProjectDock = self.__arrTk.createImage(self.__emplacementAsset + "project.png",tailleX=50, tailleY=50)
 
         # Frames
         self.__fAcceuil = self.__arrTk.createFrame(self.__screen)
@@ -28,15 +32,31 @@ class CAnWorkGUI:
         self.__fProjet = self.__arrTk.createFrame(self.__screen)
 
         # Widgets dans la frame d'accueil
-        labelTitle = self.__arrTk.createLabel(self.__fAcceuil, text=nameAssistant + " : Arrera Work",ppolice="Arial",ptaille=25)
-        btnArreraTableurAcceuil = self.__arrTk.createButton(self.__fAcceuil,width=100, height=100, image=imgTableur)
-        btnArreraWordAcceuil = self.__arrTk.createButton(self.__fAcceuil, width=100, height=100, image=imgWord)
-        btnArreraProjectAcceuil = self.__arrTk.createButton(self.__fAcceuil, width=100, height=100, image=imgProject)
+        labelTitle = self.__arrTk.createLabel(self.__fAcceuil, text=nameAssistant + " : Arrera Work",
+                                              ppolice="Arial",ptaille=25)
+        btnArreraTableurAcceuil = self.__arrTk.createButton(self.__fAcceuil,width=100,
+                                                            height=100, image=imgTableurAcceuil,
+                                                            command=self.__activeTableur)
+        btnArreraWordAcceuil = self.__arrTk.createButton(self.__fAcceuil, width=100,
+                                                         height=100, image=imgWordAcceuil,
+                                                         command=self.__activeWord)
+        btnArreraProjectAcceuil = self.__arrTk.createButton(self.__fAcceuil, width=100,
+                                                            height=100, image=imgProjectAcceuil,
+                                                            command=self.__activeProjet)
 
         # Widgets dans la frame dock
-        btnArreraTableurDock = self.__arrTk.createButton(self.__fDock,width=60, height=60, image=imgTableur)
-        btnArreraWordDock = self.__arrTk.createButton(self.__fDock, width=60, height=60, image=imgWord)
-        btnArreraProjectDock = self.__arrTk.createButton(self.__fDock, width=60, height=60, image=imgProject)
+        btnArreraTableurDock = self.__arrTk.createButton(self.__fDock,width=60,
+                                                         height=60, image=imgTableurDock,
+                                                         command=self.__activeTableur)
+        btnArreraWordDock = self.__arrTk.createButton(self.__fDock, width=60,
+                                                      height=60, image=imgWordDock,
+                                                      command=self.__activeWord)
+        btnArreraProjectDock = self.__arrTk.createButton(self.__fDock, width=60,
+                                                         height=60, image=imgProjectDock,
+                                                         command=self.__activeProjet)
+        btnArreraBackAcceuilDock = self.__arrTk.createButton(self.__fDock, width=60,
+                                                             height=60,
+                                                             command=self.__activeAcceuil)
 
         # Grille des frame
         # Ajoute 3 lignes à fAcceuil pour jouer sur le centrage vertical
@@ -49,6 +69,9 @@ class CAnWorkGUI:
         self.__fAcceuil.columnconfigure(1, weight=2)
         self.__fAcceuil.columnconfigure(2, weight=1)
 
+        self.__fDock.grid_columnconfigure(0, weight=1)
+        self.__fDock.grid_columnconfigure(5, weight=1)
+
         # Affichage des frames
         labelTitle.grid(row=0, column=0, columnspan=3, sticky='new', pady=20)  # En haut, centré, espacé en haut
 
@@ -57,9 +80,38 @@ class CAnWorkGUI:
         btnArreraWordAcceuil.grid(row=1, column=1, padx=10, pady=60)
         btnArreraProjectAcceuil.grid(row=1, column=2, padx=10, pady=60)
 
-        # Affichage main
-        self.__fAcceuil.grid(row=0, column=0, columnspan=3, sticky='nsew')
-        #self.__fDock.grid(row=1, column=0, columnspan=3, sticky='ew')
+        # PLacement des boutons dans le dock
+        btnArreraTableurDock.grid(row=0, column=1, padx=5, pady=5)
+        btnArreraWordDock.grid(row=0, column=2, padx=5, pady=5)
+        btnArreraProjectDock.grid(row=0, column=3, padx=5, pady=5)
+        btnArreraBackAcceuilDock.grid(row=0, column=4, padx=5, pady=5)
 
     def active(self):
+        self.__activeAcceuil()
         self.__arrTk.view()
+
+    def __disabelFrame(self, frame):
+        self.__fAcceuil.grid_forget()
+        self.__fDock.grid_forget()
+        self.__fTableur.grid_forget()
+        self.__fWord.grid_forget()
+        self.__fProjet.grid_forget()
+
+    def __activeAcceuil(self):
+        self.__disabelFrame(self.__fAcceuil)
+        self.__fAcceuil.grid(row=0, column=0, columnspan=3, sticky='nsew')
+
+    def __activeTableur(self):
+        self.__disabelFrame(self.__fTableur)
+        self.__fTableur.grid(row=0, column=0, columnspan=3, sticky='nsew')
+        self.__fDock.grid(row=1, column=0, columnspan=3, sticky='ew')
+
+    def __activeWord(self):
+        self.__disabelFrame(self.__fTableur)
+        self.__fWord.grid(row=0, column=0, columnspan=3, sticky='nsew')
+        self.__fDock.grid(row=1, column=0, columnspan=3, sticky='ew')
+
+    def __activeProjet(self):
+        self.__disabelFrame(self.__fTableur)
+        self.__fProjet.grid(row=0, column=0, columnspan=3, sticky='nsew')
+        self.__fDock.grid(row=1, column=0, columnspan=3, sticky='ew')
