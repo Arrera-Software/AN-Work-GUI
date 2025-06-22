@@ -2,6 +2,9 @@ from arrera_tk import *
 
 class CAnWorkGUI:
     def __init__(self, arrtk : CArreraTK,nameAssistant : str,asset:str):
+        # Attributs
+        self.__tableurOpen = True
+        # Attributs de l'interface
         self.__arrTk = arrtk
         self.__emplacementAsset = asset+"/"
         self.__screen = self.__arrTk.aTopLevel(width=500, height=600,
@@ -29,11 +32,12 @@ class CAnWorkGUI:
         self.__fAcceuil = self.__arrTk.createFrame(self.__screen)
         self.__fDock = self.__arrTk.createFrame(self.__screen, bg="grey", height=70)
         self.__fTableur = self.__arrTk.createFrame(self.__screen)
+        self.__fTableurNoOpen = self.__arrTk.createFrame(self.__screen)
         self.__fWord = self.__arrTk.createFrame(self.__screen)
         self.__fProjet = self.__arrTk.createFrame(self.__screen)
 
         # Widgets dans la frame d'accueil
-        labelTitle = self.__arrTk.createLabel(self.__fAcceuil, text=nameAssistant + " : Arrera Work",
+        labelTitleAcceuil = self.__arrTk.createLabel(self.__fAcceuil, text=nameAssistant + " : Arrera Work",
                                               ppolice="Arial",ptaille=25)
         btnArreraTableurAcceuil = self.__arrTk.createButton(self.__fAcceuil,width=100,
                                                             height=100, image=imgTableurAcceuil,
@@ -59,6 +63,25 @@ class CAnWorkGUI:
                                                              height=60,image =imgAnnulerDock,
                                                              command=self.__activeAcceuil)
 
+        # Widgets du frame Tableur
+        labelTitleNoOpenTableur = self.__arrTk.createLabel(self.__fTableurNoOpen, text="Travail sur un tableur",
+                                                     ppolice="Arial",ptaille=25)
+        btnOpenTableur = self.__arrTk.createButton(self.__fTableurNoOpen,width=90,height=90)
+
+
+        labelTitleTableur = self.__arrTk.createLabel(self.__fTableur, text="Travail sur un tableur",
+                                                     ppolice="Arial",ptaille=25)
+        btnOpenTableurWithComputer = self.__arrTk.createButton(self.__fTableur,width=90,height=90)
+        btnCloseTableur = self.__arrTk.createButton(self.__fTableur,width=90,height=90)
+        btnReadTableur = self.__arrTk.createButton(self.__fTableur,width=90,height=90)
+        btnAddValeurTableur = self.__arrTk.createButton(self.__fTableur,width=90,height=90)
+        btnAddMoyenneTableur = self.__arrTk.createButton(self.__fTableur,width=90,height=90)
+        btnAddSommeTableur = self.__arrTk.createButton(self.__fTableur,width=90,height=90)
+        btnAddComptageTableur = self.__arrTk.createButton(self.__fTableur,width=90,height=90)
+        btnAddMinimumTableur = self.__arrTk.createButton(self.__fTableur,width=90,height=90)
+        btnAddMaximumTableur = self.__arrTk.createButton(self.__fTableur,width=90,height=90)
+        btnAffichageTableur = self.__arrTk.createButton(self.__fTableur,width=90,height=90)
+        btnSupprDataTableur = self.__arrTk.createButton(self.__fTableur,width=90,height=90)
         # Grille des frame
         # Ajoute 3 lignes à fAcceuil pour jouer sur le centrage vertical
         self.__fAcceuil.rowconfigure(0, weight=1)  # espace au dessus
@@ -73,8 +96,21 @@ class CAnWorkGUI:
         self.__fDock.grid_columnconfigure(0, weight=1)
         self.__fDock.grid_columnconfigure(5, weight=1)
 
+        self.__fTableurNoOpen.grid_rowconfigure(0, weight=1)
+        self.__fTableurNoOpen.grid_rowconfigure(1, weight=0)
+        self.__fTableurNoOpen.grid_rowconfigure(2, weight=0)
+        self.__fTableurNoOpen.grid_rowconfigure(3, weight=1)
+
+        self.__fTableurNoOpen.grid_columnconfigure(0, weight=1)
+        self.__fTableurNoOpen.grid_columnconfigure(1, weight=0)
+        self.__fTableurNoOpen.grid_columnconfigure(2, weight=1)
+
+        self.__fTableur.grid_columnconfigure(0, weight=1)
+        self.__fTableur.grid_columnconfigure(1, weight=1)
+        self.__fTableur.grid_columnconfigure(2, weight=1)
+
         # Affichage des frames
-        labelTitle.grid(row=0, column=0, columnspan=3, sticky='new', pady=20)  # En haut, centré, espacé en haut
+        labelTitleAcceuil.grid(row=0, column=0, columnspan=3, sticky='new', pady=20)  # En haut, centré, espacé en haut
 
         # Placement des boutons sur la même ligne et centrés
         btnArreraTableurAcceuil.grid(row=1, column=0, padx=10, pady=60)
@@ -87,6 +123,25 @@ class CAnWorkGUI:
         btnArreraProjectDock.grid(row=0, column=3, padx=5, pady=5)
         btnArreraBackAcceuilDock.grid(row=0, column=4, padx=5, pady=5)
 
+        # Placement widget des frame Tableur
+        labelTitleNoOpenTableur.grid(row=0, column=1, sticky="n")
+        btnOpenTableur.grid(row=2, column=1, sticky="n")
+
+        labelTitleTableur.grid(row=0, column=0, columnspan=3, sticky='ew')
+
+        btnOpenTableurWithComputer.grid(row=1, column=0, padx=20, pady=20)
+        btnReadTableur.grid(row=1, column=1, padx=20, pady=20)
+        btnAddValeurTableur.grid(row=1, column=2, padx=20, pady=20)
+        btnAddMoyenneTableur.grid(row=2, column=0, padx=20, pady=20)
+        btnAddSommeTableur.grid(row=2, column=1, padx=20, pady=20)
+        btnAddComptageTableur.grid(row=2, column=2, padx=20, pady=20)
+        btnAddMinimumTableur.grid(row=3, column=0, padx=20, pady=20)
+        btnAddMaximumTableur.grid(row=3, column=1, padx=20, pady=20)
+        btnAffichageTableur.grid(row=3, column=2, padx=20, pady=20)
+        btnSupprDataTableur.grid(row=4, column=0, padx=20, pady=20)
+        btnCloseTableur.grid(row=4, column=1, padx=20, pady=20)
+
+
     def active(self):
         self.__activeAcceuil()
         self.__arrTk.view()
@@ -97,6 +152,7 @@ class CAnWorkGUI:
         self.__fTableur.grid_forget()
         self.__fWord.grid_forget()
         self.__fProjet.grid_forget()
+        self.__fTableurNoOpen.grid_forget()
 
     def __activeAcceuil(self):
         self.__disabelFrame(self.__fAcceuil)
@@ -104,6 +160,10 @@ class CAnWorkGUI:
 
     def __activeTableur(self):
         self.__disabelFrame(self.__fTableur)
+        if not self.__tableurOpen:
+            self.__fTableurNoOpen.grid(row=0, column=0, columnspan=3, sticky='nsew')
+        else:
+            self.__fTableur.grid(row=0, column=0, columnspan=3, sticky='nsew')
         self.__fTableur.grid(row=0, column=0, columnspan=3, sticky='nsew')
         self.__fDock.grid(row=1, column=0, columnspan=3, sticky='ew')
 
