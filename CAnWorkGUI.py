@@ -4,16 +4,15 @@ class CAnWorkGUI:
     def __init__(self, arrtk : CArreraTK,nameAssistant : str,asset:str):
         # Attributs
         self.__tableurOpen = False
+        self.__wordOpen = True
         # Attributs de l'interface
         self.__arrTk = arrtk
         self.__emplacementAsset = asset+"/"
         self.__screen = self.__arrTk.aTopLevel(width=500, height=650,
                                                title=nameAssistant + " : Arrera Work",
                                                resizable=True)
-
-        # Row 0 = rouge, row 1 = bleu
-        self.__screen.rowconfigure(0, weight=1)  # le rouge occupe tout sauf la place du bleu
-        self.__screen.rowconfigure(1, weight=0)  # le bleu a une hauteur fixe
+        self.__screen.rowconfigure(0, weight=1)
+        self.__screen.rowconfigure(1, weight=0)
         self.__screen.columnconfigure(0, weight=1)
         self.__screen.columnconfigure(1, weight=2)
         self.__screen.columnconfigure(2, weight=1)
@@ -60,6 +59,7 @@ class CAnWorkGUI:
         self.__fTableur = self.__arrTk.createFrame(self.__screen)
         self.__fTableurNoOpen = self.__arrTk.createFrame(self.__screen)
         self.__fWord = self.__arrTk.createFrame(self.__screen)
+        self.__fWordNoOpen = self.__arrTk.createFrame(self.__screen)
         self.__fProjet = self.__arrTk.createFrame(self.__screen)
 
         # Widgets dans la frame d'accueil
@@ -107,11 +107,23 @@ class CAnWorkGUI:
         btnAddMaximumTableur = self.__arrTk.createButton(self.__fTableur,width=90,height=90,image=imgAddMaxmum)
         btnAffichageTableur = self.__arrTk.createButton(self.__fTableur,width=90,height=90,image=imgViewTableur)
         btnSupprDataTableur = self.__arrTk.createButton(self.__fTableur,width=90,height=90,image=imgSupprValeur)
+
+        # Widgets dans la frame Word
+        labelTitleNoOpenWord = self.__arrTk.createLabel(self.__fWordNoOpen, text="Travail sur un document Word",
+                                                  ppolice="Arial",ptaille=25)
+        btnOpenWord = self.__arrTk.createButton(self.__fWordNoOpen,width=90,height=90)
+
+        labelTitleWord = self.__arrTk.createLabel(self.__fWord, text="Travail sur un document Word",
+                                                    ppolice="Arial",ptaille=25)
+        btnOpenWordWithComputer = self.__arrTk.createButton(self.__fWord,width=90,height=90)
+        btnCloseWord = self.__arrTk.createButton(self.__fWord,width=90,height=90)
+        btnReadWord = self.__arrTk.createButton(self.__fWord,width=90,height=90)
+        btnWriteWord = self.__arrTk.createButton(self.__fWord,width=90,height=90)
+
         # Grille des frame
-        # Ajoute 3 lignes à fAcceuil pour jouer sur le centrage vertical
-        self.__fAcceuil.rowconfigure(0, weight=1)  # espace au dessus
-        self.__fAcceuil.rowconfigure(1, weight=0)  # boutons ici
-        self.__fAcceuil.rowconfigure(2, weight=1)  # espace en dessous
+        self.__fAcceuil.rowconfigure(0, weight=1)
+        self.__fAcceuil.rowconfigure(1, weight=0)
+        self.__fAcceuil.rowconfigure(2, weight=1)
 
         # Colonnes pareil pour leur largeur
         self.__fAcceuil.columnconfigure(0, weight=1)
@@ -133,6 +145,19 @@ class CAnWorkGUI:
         self.__fTableur.grid_columnconfigure(0, weight=1)
         self.__fTableur.grid_columnconfigure(1, weight=1)
         self.__fTableur.grid_columnconfigure(2, weight=1)
+
+        self.__fWordNoOpen.grid_rowconfigure(0, weight=1)
+        self.__fWordNoOpen.grid_rowconfigure(1, weight=0)
+        self.__fWordNoOpen.grid_rowconfigure(2, weight=0)
+        self.__fWordNoOpen.grid_rowconfigure(3, weight=1)
+
+        self.__fWordNoOpen.grid_columnconfigure(0, weight=1)
+        self.__fWordNoOpen.grid_columnconfigure(1, weight=0)
+        self.__fWordNoOpen.grid_columnconfigure(2, weight=1)
+
+        self.__fWord.grid_columnconfigure(0, weight=1)
+        self.__fWord.grid_columnconfigure(1, weight=1)
+        self.__fWord.grid_columnconfigure(2, weight=1)
 
         # Affichage des frames
         labelTitleAcceuil.grid(row=0, column=0, columnspan=3, sticky='new', pady=20)  # En haut, centré, espacé en haut
@@ -167,6 +192,15 @@ class CAnWorkGUI:
         btnSupprDataTableur.grid(row=4, column=0, padx=20, pady=20)
         btnCloseTableur.grid(row=4, column=1, padx=20, pady=20)
 
+        labelTitleNoOpenWord.grid(row=0, column=1, sticky="n")
+        btnOpenWord.grid(row=2, column=1, sticky="n")
+
+        labelTitleWord.grid(row=0, column=0, columnspan=3, sticky='ew')
+        btnOpenWordWithComputer.grid(row=1, column=0, padx=20, pady=20)
+        btnCloseWord.grid(row=1, column=1, padx=20, pady=20)
+        btnReadWord.grid(row=1, column=2, padx=20, pady=20)
+        btnWriteWord.grid(row=2, column=0, padx=20, pady=20)
+
 
     def active(self):
         self.__activeAcceuil()
@@ -179,6 +213,7 @@ class CAnWorkGUI:
         self.__fWord.grid_forget()
         self.__fProjet.grid_forget()
         self.__fTableurNoOpen.grid_forget()
+        self.__fWordNoOpen.grid_forget()
 
     def __activeAcceuil(self):
         self.__disabelFrame(self.__fAcceuil)
@@ -195,7 +230,11 @@ class CAnWorkGUI:
 
     def __activeWord(self):
         self.__disabelFrame(self.__fTableur)
-        self.__fWord.grid(row=0, column=0, columnspan=3, sticky='nsew')
+        if not self.__wordOpen:
+            self.__fWordNoOpen.grid(row=0, column=0, columnspan=3, sticky='nsew')
+        else:
+            self.__fWord.grid(row=0, column=0, columnspan=3, sticky='nsew')
+
         self.__fDock.grid(row=1, column=0, columnspan=3, sticky='ew')
 
     def __activeProjet(self):
