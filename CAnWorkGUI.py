@@ -4,7 +4,7 @@ class CAnWorkGUI:
     def __init__(self, arrtk : CArreraTK,nameAssistant : str,asset:str):
         # Attributs
         self.__tableurOpen = False
-        self.__wordOpen = True
+        self.__wordOpen = False
         # Attributs de l'interface
         self.__arrTk = arrtk
         self.__emplacementAsset = asset+"/"
@@ -52,6 +52,18 @@ class CAnWorkGUI:
                                                   ,tailleX=90, tailleY=90)
         imgViewTableur = self.__arrTk.createImage(self.__emplacementAsset + "tableur/view-tableur.png"
                                                   ,tailleX=90, tailleY=90)
+
+        # Images pour la frame Word
+        imgOpenWord = self.__arrTk.createImage(self.__emplacementAsset + "word/open-word.png",
+                                                tailleX=90, tailleY=90)
+        imgOpenWordWithComputer = self.__arrTk.createImage(self.__emplacementAsset + "word/open-word-coputer-soft.png",
+                                                            tailleX=90, tailleY=90)
+        imgCloseWord = self.__arrTk.createImage(self.__emplacementAsset + "word/close-word.png",
+                                                    tailleX=90, tailleY=90)
+        imgReadWord = self.__arrTk.createImage(self.__emplacementAsset + "word/read-word.png",
+                                                tailleX=90, tailleY=90)
+        imgWriteWord = self.__arrTk.createImage(self.__emplacementAsset + "word/write-word.png",
+                                                tailleX=90, tailleY=90)
 
         # Frames
         self.__fAcceuil = self.__arrTk.createFrame(self.__screen)
@@ -111,14 +123,14 @@ class CAnWorkGUI:
         # Widgets dans la frame Word
         labelTitleNoOpenWord = self.__arrTk.createLabel(self.__fWordNoOpen, text="Travail sur un document Word",
                                                   ppolice="Arial",ptaille=25)
-        btnOpenWord = self.__arrTk.createButton(self.__fWordNoOpen,width=90,height=90)
+        btnOpenWord = self.__arrTk.createButton(self.__fWordNoOpen,width=90,height=90,image=imgOpenWord)
 
         labelTitleWord = self.__arrTk.createLabel(self.__fWord, text="Travail sur un document Word",
                                                     ppolice="Arial",ptaille=25)
-        btnOpenWordWithComputer = self.__arrTk.createButton(self.__fWord,width=90,height=90)
-        btnCloseWord = self.__arrTk.createButton(self.__fWord,width=90,height=90)
-        btnReadWord = self.__arrTk.createButton(self.__fWord,width=90,height=90)
-        btnWriteWord = self.__arrTk.createButton(self.__fWord,width=90,height=90)
+        btnOpenWordWithComputer = self.__arrTk.createButton(self.__fWord,width=90,height=90,image=imgOpenWordWithComputer)
+        btnCloseWord = self.__arrTk.createButton(self.__fWord,width=90,height=90,image=imgCloseWord)
+        btnReadWord = self.__arrTk.createButton(self.__fWord,width=90,height=90,image=imgReadWord)
+        btnWriteWord = self.__arrTk.createButton(self.__fWord,width=90,height=90,image=imgWriteWord)
 
         # Grille des frame
         self.__fAcceuil.rowconfigure(0, weight=1)
