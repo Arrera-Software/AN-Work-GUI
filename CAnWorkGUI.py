@@ -3,11 +3,11 @@ from arrera_tk import *
 class CAnWorkGUI:
     def __init__(self, arrtk : CArreraTK,nameAssistant : str,asset:str):
         # Attributs
-        self.__tableurOpen = True
+        self.__tableurOpen = False
         # Attributs de l'interface
         self.__arrTk = arrtk
         self.__emplacementAsset = asset+"/"
-        self.__screen = self.__arrTk.aTopLevel(width=500, height=600,
+        self.__screen = self.__arrTk.aTopLevel(width=500, height=650,
                                                title=nameAssistant + " : Arrera Work",
                                                resizable=True)
 
@@ -27,6 +27,32 @@ class CAnWorkGUI:
         imgWordDock = self.__arrTk.createImage(self.__emplacementAsset + "word.png",tailleX=50, tailleY=50)
         imgProjectDock = self.__arrTk.createImage(self.__emplacementAsset + "project.png",tailleX=50, tailleY=50)
         imgAnnulerDock = self.__arrTk.createImage(self.__emplacementAsset + "annuler.png",tailleX=50, tailleY=50)
+
+        # Images pour la frame Tableur
+        imgAddComptage = self.__arrTk.createImage(self.__emplacementAsset + "tableur/add-comptagexcf.png",
+                                                  tailleX=90, tailleY=90)
+        imgAddMaxmum = self.__arrTk.createImage(self.__emplacementAsset + "tableur/add-maxmum.png",
+                                                tailleX=90, tailleY=90)
+        imgAddMinimum = self.__arrTk.createImage(self.__emplacementAsset + "tableur/add-minimum.png",
+                                                 tailleX=90, tailleY=90)
+        imgAddMoyenne = self.__arrTk.createImage(self.__emplacementAsset + "tableur/add-moyenne.png",
+                                                 tailleX=90, tailleY=90)
+        imgAddSomme = self.__arrTk.createImage(self.__emplacementAsset + "tableur/add-somme.png"
+                                               ,tailleX=90, tailleY=90)
+        imgAddValeur = self.__arrTk.createImage(self.__emplacementAsset + "tableur/add-valeur.png"
+                                                ,tailleX=90, tailleY=90)
+        imgCloseTableur = self.__arrTk.createImage(self.__emplacementAsset + "tableur/close-tableur.png"
+                                                   ,tailleX=90, tailleY=90)
+        imgOpenTableur = self.__arrTk.createImage(self.__emplacementAsset + "tableur/open-tableur.png"
+                                                  ,tailleX=90, tailleY=90)
+        imgOpenTableurCoputerSoft = self.__arrTk.createImage(self.__emplacementAsset + "tableur/open-tableur-coputer-soft.png"
+                                                             ,tailleX=90, tailleY=90)
+        imgReadTableur = self.__arrTk.createImage(self.__emplacementAsset + "tableur/read-tableur.png"
+                                                  ,tailleX=90, tailleY=90)
+        imgSupprValeur = self.__arrTk.createImage(self.__emplacementAsset + "tableur/suppr-valeur.png"
+                                                  ,tailleX=90, tailleY=90)
+        imgViewTableur = self.__arrTk.createImage(self.__emplacementAsset + "tableur/view-tableur.png"
+                                                  ,tailleX=90, tailleY=90)
 
         # Frames
         self.__fAcceuil = self.__arrTk.createFrame(self.__screen)
@@ -66,22 +92,21 @@ class CAnWorkGUI:
         # Widgets du frame Tableur
         labelTitleNoOpenTableur = self.__arrTk.createLabel(self.__fTableurNoOpen, text="Travail sur un tableur",
                                                      ppolice="Arial",ptaille=25)
-        btnOpenTableur = self.__arrTk.createButton(self.__fTableurNoOpen,width=90,height=90)
-
-
+        btnOpenTableur = self.__arrTk.createButton(self.__fTableurNoOpen,width=90,height=90,
+                                                   image=imgOpenTableur)
         labelTitleTableur = self.__arrTk.createLabel(self.__fTableur, text="Travail sur un tableur",
                                                      ppolice="Arial",ptaille=25)
-        btnOpenTableurWithComputer = self.__arrTk.createButton(self.__fTableur,width=90,height=90)
-        btnCloseTableur = self.__arrTk.createButton(self.__fTableur,width=90,height=90)
-        btnReadTableur = self.__arrTk.createButton(self.__fTableur,width=90,height=90)
-        btnAddValeurTableur = self.__arrTk.createButton(self.__fTableur,width=90,height=90)
-        btnAddMoyenneTableur = self.__arrTk.createButton(self.__fTableur,width=90,height=90)
-        btnAddSommeTableur = self.__arrTk.createButton(self.__fTableur,width=90,height=90)
-        btnAddComptageTableur = self.__arrTk.createButton(self.__fTableur,width=90,height=90)
-        btnAddMinimumTableur = self.__arrTk.createButton(self.__fTableur,width=90,height=90)
-        btnAddMaximumTableur = self.__arrTk.createButton(self.__fTableur,width=90,height=90)
-        btnAffichageTableur = self.__arrTk.createButton(self.__fTableur,width=90,height=90)
-        btnSupprDataTableur = self.__arrTk.createButton(self.__fTableur,width=90,height=90)
+        btnOpenTableurWithComputer = self.__arrTk.createButton(self.__fTableur,width=90,height=90,image=imgOpenTableurCoputerSoft,)
+        btnCloseTableur = self.__arrTk.createButton(self.__fTableur,width=90,height=90,image=imgCloseTableur)
+        btnReadTableur = self.__arrTk.createButton(self.__fTableur,width=90,height=90,image=imgReadTableur)
+        btnAddValeurTableur = self.__arrTk.createButton(self.__fTableur,width=90,height=90,image=imgAddValeur)
+        btnAddMoyenneTableur = self.__arrTk.createButton(self.__fTableur,width=90,height=90,image=imgAddMoyenne)
+        btnAddSommeTableur = self.__arrTk.createButton(self.__fTableur,width=90,height=90,image=imgAddSomme)
+        btnAddComptageTableur = self.__arrTk.createButton(self.__fTableur,width=90,height=90,image=imgAddComptage)
+        btnAddMinimumTableur = self.__arrTk.createButton(self.__fTableur,width=90,height=90,image=imgAddMinimum)
+        btnAddMaximumTableur = self.__arrTk.createButton(self.__fTableur,width=90,height=90,image=imgAddMaxmum)
+        btnAffichageTableur = self.__arrTk.createButton(self.__fTableur,width=90,height=90,image=imgViewTableur)
+        btnSupprDataTableur = self.__arrTk.createButton(self.__fTableur,width=90,height=90,image=imgSupprValeur)
         # Grille des frame
         # Ajoute 3 lignes à fAcceuil pour jouer sur le centrage vertical
         self.__fAcceuil.rowconfigure(0, weight=1)  # espace au dessus
@@ -130,6 +155,7 @@ class CAnWorkGUI:
         labelTitleTableur.grid(row=0, column=0, columnspan=3, sticky='ew')
 
         btnOpenTableurWithComputer.grid(row=1, column=0, padx=20, pady=20)
+
         btnReadTableur.grid(row=1, column=1, padx=20, pady=20)
         btnAddValeurTableur.grid(row=1, column=2, padx=20, pady=20)
         btnAddMoyenneTableur.grid(row=2, column=0, padx=20, pady=20)
