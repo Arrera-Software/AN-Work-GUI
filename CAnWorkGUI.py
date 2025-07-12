@@ -5,6 +5,7 @@ class CAnWorkGUI:
         # Attributs
         self.__tableurOpen = False
         self.__wordOpen = False
+        self.__projectOpen = True
         # Attributs de l'interface
         self.__arrTk = arrtk
         self.__emplacementAsset = asset+"/"
@@ -73,6 +74,7 @@ class CAnWorkGUI:
         self.__fWord = self.__arrTk.createFrame(self.__screen)
         self.__fWordNoOpen = self.__arrTk.createFrame(self.__screen)
         self.__fProjet = self.__arrTk.createFrame(self.__screen)
+        self.__fProjetNoOpen = self.__arrTk.createFrame(self.__screen)
 
         # Widgets dans la frame d'accueil
         labelTitleAcceuil = self.__arrTk.createLabel(self.__fAcceuil, text=nameAssistant + " : Arrera Work",
@@ -132,6 +134,26 @@ class CAnWorkGUI:
         btnReadWord = self.__arrTk.createButton(self.__fWord,width=90,height=90,image=imgReadWord)
         btnWriteWord = self.__arrTk.createButton(self.__fWord,width=90,height=90,image=imgWriteWord)
 
+        # Widget dans la frame Projet
+        # No OPEN
+        labelTitleNoOpenProjet = self.__arrTk.createLabel(self.__fProjetNoOpen, text="Travail sur un projet",
+                                                          ppolice="Arial", ptaille=25)
+
+        btnOpenProjet = self.__arrTk.createButton(self.__fProjetNoOpen, width=90, height=90)
+        btnCreateProjet = self.__arrTk.createButton(self.__fProjetNoOpen, width=90, height=90)
+
+        # OPEN
+        labelTitleProjet = self.__arrTk.createLabel(self.__fProjet, text="Travail sur un projet",
+                                                    ppolice="Arial", ptaille=25)
+        btnAddTypeProjet = self.__arrTk.createButton(self.__fProjet, width=90, height=90)
+        btnShowTypeFile = self.__arrTk.createButton(self.__fProjet, width=90, height=90)
+        btnCreateFileProjet = self.__arrTk.createButton(self.__fProjet, width=90, height=90)
+        btnOpenFileProjet = self.__arrTk.createButton(self.__fProjet, width=90, height=90)
+        btnViewTaskProjet = self.__arrTk.createButton(self.__fProjet, width=90, height=90)
+        btnSayAllTaskProjet = self.__arrTk.createButton(self.__fProjet, width=90, height=90)
+
+        btnCloseProjet = self.__arrTk.createButton(self.__fProjet, width=90, height=90)
+
         # Grille des frame
         self.__fAcceuil.rowconfigure(0, weight=1)
         self.__fAcceuil.rowconfigure(1, weight=0)
@@ -170,6 +192,25 @@ class CAnWorkGUI:
         self.__fWord.grid_columnconfigure(0, weight=1)
         self.__fWord.grid_columnconfigure(1, weight=1)
         self.__fWord.grid_columnconfigure(2, weight=1)
+
+        self.__fProjetNoOpen.grid_rowconfigure(0, weight=1)
+        self.__fProjetNoOpen.grid_rowconfigure(1, weight=0)
+        self.__fProjetNoOpen.grid_rowconfigure(2, weight=0)
+        self.__fProjetNoOpen.grid_rowconfigure(3, weight=1)
+
+        self.__fProjetNoOpen.grid_columnconfigure(0, weight=1)
+        self.__fProjetNoOpen.grid_columnconfigure(1, weight=0)
+        self.__fProjetNoOpen.grid_columnconfigure(2, weight=1)
+
+        # Centrage vertical par lignes vides
+        self.__fProjet.grid_rowconfigure(0, weight=1)
+        self.__fProjet.grid_rowconfigure(5, weight=1)
+
+        # Centrage horizontal
+        self.__fProjet.grid_columnconfigure(0, weight=1)
+        self.__fProjet.grid_columnconfigure(1, weight=0)
+        self.__fProjet.grid_columnconfigure(2, weight=1)
+
 
         # Affichage des frames
         labelTitleAcceuil.grid(row=0, column=0, columnspan=3, sticky='new', pady=20)  # En haut, centré, espacé en haut
@@ -213,12 +254,27 @@ class CAnWorkGUI:
         btnReadWord.grid(row=1, column=2, padx=20, pady=20)
         btnWriteWord.grid(row=2, column=0, padx=20, pady=20)
 
+        # Placement des widgets dans la frame Projet
+        labelTitleProjet.grid(row=0, column=0, columnspan=3, sticky='new')
+        labelTitleNoOpenProjet.grid(row=0, column=1, sticky="n")
+        btnOpenProjet.grid(row=2, column=0, sticky="n")
+        btnCreateProjet.grid(row=2, column=2, sticky="n")
+
+        # labelTitleProjet.grid(row=1, column=0, columnspan=3, pady=(10, 30))
+        btnAddTypeProjet.grid(row=2, column=0, padx=5, pady=5)
+        btnShowTypeFile.grid(row=2, column=1, padx=5, pady=5)
+        btnCreateFileProjet.grid(row=2, column=2, padx=5, pady=5)
+        btnOpenFileProjet.grid(row=3, column=0, padx=5, pady=5)
+        btnViewTaskProjet.grid(row=3, column=1, padx=5, pady=5)
+        btnSayAllTaskProjet.grid(row=3, column=2, padx=5, pady=5)
+        btnCloseProjet.grid(row=4, column=1, padx=5, pady=(5, 20))
+
 
     def active(self):
         self.__activeAcceuil()
         self.__arrTk.view()
 
-    def __disabelFrame(self, frame):
+    def __disabelFrame(self):
         self.__fAcceuil.grid_forget()
         self.__fDock.grid_forget()
         self.__fTableur.grid_forget()
@@ -226,30 +282,40 @@ class CAnWorkGUI:
         self.__fProjet.grid_forget()
         self.__fTableurNoOpen.grid_forget()
         self.__fWordNoOpen.grid_forget()
+        self.__fProjetNoOpen.grid_forget()
 
     def __activeAcceuil(self):
-        self.__disabelFrame(self.__fAcceuil)
+        self.__disabelFrame()
         self.__fAcceuil.grid(row=0, column=0, columnspan=3, sticky='nsew')
+        self.__screen.update()
 
     def __activeTableur(self):
-        self.__disabelFrame(self.__fTableur)
+        self.__disabelFrame()
         if not self.__tableurOpen:
             self.__fTableurNoOpen.grid(row=0, column=0, columnspan=3, sticky='nsew')
         else:
             self.__fTableur.grid(row=0, column=0, columnspan=3, sticky='nsew')
         self.__fTableur.grid(row=0, column=0, columnspan=3, sticky='nsew')
         self.__fDock.grid(row=1, column=0, columnspan=3, sticky='ew')
+        self.__screen.update()
 
     def __activeWord(self):
-        self.__disabelFrame(self.__fTableur)
+        self.__disabelFrame()
         if not self.__wordOpen:
             self.__fWordNoOpen.grid(row=0, column=0, columnspan=3, sticky='nsew')
         else:
             self.__fWord.grid(row=0, column=0, columnspan=3, sticky='nsew')
 
         self.__fDock.grid(row=1, column=0, columnspan=3, sticky='ew')
+        self.__screen.update()
 
     def __activeProjet(self):
-        self.__disabelFrame(self.__fTableur)
-        self.__fProjet.grid(row=0, column=0, columnspan=3, sticky='nsew')
+        self.__disabelFrame()
+
+        if not self.__projectOpen:
+            self.__fProjetNoOpen.grid(row=0, column=0, columnspan=3, sticky='nsew')
+        else:
+            self.__fProjet.grid(row=0, column=0, columnspan=3, sticky='nsew')
+
         self.__fDock.grid(row=1, column=0, columnspan=3, sticky='ew')
+        self.__screen.update()
