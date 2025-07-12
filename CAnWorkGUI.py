@@ -19,14 +19,14 @@ class CAnWorkGUI:
         self.__screen.columnconfigure(2, weight=1)
 
         # Recuperation des image
-        imgTableurAcceuil = self.__arrTk.createImage(self.__emplacementAsset + "tableur.png",tailleX=100, tailleY=100)
-        imgWordAcceuil = self.__arrTk.createImage(self.__emplacementAsset + "word.png",tailleX=100, tailleY=100)
-        imgProjectAcceuil = self.__arrTk.createImage(self.__emplacementAsset + "project.png",tailleX=100, tailleY=100)
+        imgTableurAcceuil = self.__arrTk.createImage(self.__emplacementAsset + "acceuil/tableur.png",tailleX=100, tailleY=100)
+        imgWordAcceuil = self.__arrTk.createImage(self.__emplacementAsset + "acceuil/word.png",tailleX=100, tailleY=100)
+        imgProjectAcceuil = self.__arrTk.createImage(self.__emplacementAsset + "acceuil/project.png",tailleX=100, tailleY=100)
 
-        imgTableurDock = self.__arrTk.createImage(self.__emplacementAsset + "tableur.png",tailleX=50, tailleY=50)
-        imgWordDock = self.__arrTk.createImage(self.__emplacementAsset + "word.png",tailleX=50, tailleY=50)
-        imgProjectDock = self.__arrTk.createImage(self.__emplacementAsset + "project.png",tailleX=50, tailleY=50)
-        imgAnnulerDock = self.__arrTk.createImage(self.__emplacementAsset + "annuler.png",tailleX=50, tailleY=50)
+        imgTableurDock = self.__arrTk.createImage(self.__emplacementAsset + "acceuil/tableur.png",tailleX=50, tailleY=50)
+        imgWordDock = self.__arrTk.createImage(self.__emplacementAsset + "acceuil/word.png",tailleX=50, tailleY=50)
+        imgProjectDock = self.__arrTk.createImage(self.__emplacementAsset + "acceuil/project.png",tailleX=50, tailleY=50)
+        imgAnnulerDock = self.__arrTk.createImage(self.__emplacementAsset + "acceuil/annuler.png",tailleX=50, tailleY=50)
 
         # Images pour la frame Tableur
         imgAddComptage = self.__arrTk.createImage(self.__emplacementAsset + "tableur/add-comptagexcf.png",
