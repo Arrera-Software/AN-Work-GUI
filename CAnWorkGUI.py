@@ -66,6 +66,26 @@ class CAnWorkGUI:
         imgWriteWord = self.__arrTk.createImage(self.__emplacementAsset + "word/write-word.png",
                                                 tailleX=90, tailleY=90)
 
+        # Images pour la frame Projet
+        imgCreateFileProjet = self.__arrTk.createImage(self.__emplacementAsset + "project/create-file-project.png",
+                                                    tailleX=90, tailleY=90)
+        imgCreateProject = self.__arrTk.createImage(self.__emplacementAsset + "project/create-projet.png",
+                                                    tailleX=90, tailleY=90)
+        imgOpenFileProjet = self.__arrTk.createImage(self.__emplacementAsset + "project/open-file-project.png",
+                                                    tailleX=90, tailleY=90)
+        imgOpenProjet = self.__arrTk.createImage(self.__emplacementAsset + "project/open-project.png",
+                                                    tailleX=90, tailleY=90)
+        imgSetTypeProjet = self.__arrTk.createImage(self.__emplacementAsset + "project/setType-project.png",
+                                                    tailleX=90, tailleY=90)
+        imgTaskSayProjet = self.__arrTk.createImage(self.__emplacementAsset + "project/task-say.png",
+                                                    tailleX=90, tailleY=90)
+        imgTaskViewProjet = self.__arrTk.createImage(self.__emplacementAsset + "project/view-task-project.png",
+                                                    tailleX=90, tailleY=90)
+        imgViewTypeFileProjet = self.__arrTk.createImage(self.__emplacementAsset + "project/view-type.png",
+                                                    tailleX=90, tailleY=90)
+        imgCloseProjet = self.__arrTk.createImage(self.__emplacementAsset + "project/close-project.png",
+                                                    tailleX=90, tailleY=90)
+
         # Frames
         self.__fAcceuil = self.__arrTk.createFrame(self.__screen)
         self.__fDock = self.__arrTk.createFrame(self.__screen, bg="grey", height=70)
@@ -139,20 +159,20 @@ class CAnWorkGUI:
         labelTitleNoOpenProjet = self.__arrTk.createLabel(self.__fProjetNoOpen, text="Travail sur un projet",
                                                           ppolice="Arial", ptaille=25)
 
-        btnOpenProjet = self.__arrTk.createButton(self.__fProjetNoOpen, width=90, height=90)
-        btnCreateProjet = self.__arrTk.createButton(self.__fProjetNoOpen, width=90, height=90)
+        btnOpenProjet = self.__arrTk.createButton(self.__fProjetNoOpen, width=90, height=90,image=imgOpenProjet)
+        btnCreateProjet = self.__arrTk.createButton(self.__fProjetNoOpen, width=90, height=90,image=imgCreateProject)
 
         # OPEN
         labelTitleProjet = self.__arrTk.createLabel(self.__fProjet, text="Travail sur un projet",
                                                     ppolice="Arial", ptaille=25)
-        btnAddTypeProjet = self.__arrTk.createButton(self.__fProjet, width=90, height=90)
-        btnShowTypeFile = self.__arrTk.createButton(self.__fProjet, width=90, height=90)
-        btnCreateFileProjet = self.__arrTk.createButton(self.__fProjet, width=90, height=90)
-        btnOpenFileProjet = self.__arrTk.createButton(self.__fProjet, width=90, height=90)
-        btnViewTaskProjet = self.__arrTk.createButton(self.__fProjet, width=90, height=90)
-        btnSayAllTaskProjet = self.__arrTk.createButton(self.__fProjet, width=90, height=90)
+        btnAddTypeProjet = self.__arrTk.createButton(self.__fProjet, width=90, height=90,image=imgSetTypeProjet)
+        btnShowTypeFile = self.__arrTk.createButton(self.__fProjet, width=90, height=90,image=imgViewTypeFileProjet)
+        btnCreateFileProjet = self.__arrTk.createButton(self.__fProjet, width=90, height=90,image=imgCreateFileProjet)
+        btnOpenFileProjet = self.__arrTk.createButton(self.__fProjet, width=90, height=90,image=imgOpenFileProjet)
+        btnViewTaskProjet = self.__arrTk.createButton(self.__fProjet, width=90, height=90,image=imgTaskViewProjet)
+        btnSayAllTaskProjet = self.__arrTk.createButton(self.__fProjet, width=90, height=90, image=imgTaskSayProjet)
 
-        btnCloseProjet = self.__arrTk.createButton(self.__fProjet, width=90, height=90)
+        btnCloseProjet = self.__arrTk.createButton(self.__fProjet, width=90, height=90,image=imgCloseProjet)
 
         # Grille des frame
         self.__fAcceuil.rowconfigure(0, weight=1)
