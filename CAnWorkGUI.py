@@ -9,8 +9,11 @@ class CAnWorkGUI:
         # Attributs de l'interface
         self.__arrTk = arrtk
         self.__emplacementAsset = asset+"/"
+        self.__nameAssistant = nameAssistant
+
+    def __createWindows(self):
         self.__screen = self.__arrTk.aTopLevel(width=500, height=650,
-                                               title=nameAssistant + " : Arrera Work",
+                                               title=self.__nameAssistant + " : Arrera Work",
                                                resizable=True)
         self.__screen.rowconfigure(0, weight=1)
         self.__screen.rowconfigure(1, weight=0)
@@ -97,7 +100,7 @@ class CAnWorkGUI:
         self.__fProjetNoOpen = self.__arrTk.createFrame(self.__screen)
 
         # Widgets dans la frame d'accueil
-        labelTitleAcceuil = self.__arrTk.createLabel(self.__fAcceuil, text=nameAssistant + " : Arrera Work",
+        labelTitleAcceuil = self.__arrTk.createLabel(self.__fAcceuil, text=self.__nameAssistant + " : Arrera Work",
                                               ppolice="Arial",ptaille=25)
         btnArreraTableurAcceuil = self.__arrTk.createButton(self.__fAcceuil,width=100,
                                                             height=100, image=imgTableurAcceuil,
@@ -290,9 +293,21 @@ class CAnWorkGUI:
         btnCloseProjet.grid(row=4, column=1, padx=5, pady=(5, 20))
 
 
-    def active(self):
+    def activeAcceuil(self):
+        self.__createWindows()
         self.__activeAcceuil()
-        self.__arrTk.view()
+
+    def activeProjet(self):
+        self.__createWindows()
+        self.__activeProjet()
+
+    def activeTableur(self):
+        self.__createWindows()
+        self.__activeTableur()
+
+    def activeWord(self):
+        self.__createWindows()
+        self.__activeWord()
 
     def __disabelFrame(self):
         self.__fAcceuil.grid_forget()
